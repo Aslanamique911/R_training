@@ -1,0 +1,79 @@
+Sure! Below is a **side-by-side comparison table** for **base R plotting** and **ggplot2** adjustments. This will make it easier to understand how to customize different aspects of plots in both methods.
+
+---
+
+## **🔹 Comparison of Plot Adjustments in Base R vs. ggplot2**
+| **Feature**        | **Base R (plot, barplot, boxplot, etc.)** | **ggplot2 Equivalent** |
+|-------------------|------------------------------------|--------------------|
+| **Main Title** | `main = "Title"` | `ggtitle("Title")` or `labs(title = "Title")` |
+| **Subtitle** | `sub = "Subtitle"` | `labs(subtitle = "Subtitle")` |
+| **X-axis Label** | `xlab = "X Axis"` | `labs(x = "X Axis")` |
+| **Y-axis Label** | `ylab = "Y Axis"` | `labs(y = "Y Axis")` |
+| **Axis Limits** | `xlim = c(min, max)`, `ylim = c(min, max)` | `scale_x_continuous(limits = c(min, max))` |
+| **Axis Text Size** | `cex.axis = 1.2` | `theme(axis.text = element_text(size = 12))` |
+| **Axis Title Size** | `cex.lab = 1.4` | `theme(axis.title = element_text(size = 14))` |
+| **Rotate Axis Labels** | `las = 2` (vertical) | `theme(axis.text.x = element_text(angle = 45, hjust = 1))` |
+| **Point Shape** | `pch = 16` | `geom_point(shape = 16)` |
+| **Point Size** | `cex = 1.5` | `geom_point(size = 3)` |
+| **Point Color** | `col = "red"` | `geom_point(color = "red")` |
+| **Line Width** | `lwd = 2` | `geom_line(size = 2)` |
+| **Line Type** | `lty = 2` (dashed) | `geom_line(linetype = "dashed")` |
+| **Bar Color** | `col = "blue"` | `geom_bar(fill = "blue")` |
+| **Boxplot Color** | `col = "green"` | `geom_boxplot(fill = "green")` |
+| **Legend Title** | `legend("topright", title = "Groups")` | `labs(color = "Groups")` |
+| **Legend Position** | `legend("bottomleft")` | `theme(legend.position = "bottom")` |
+| **Remove Legend** | Not possible in `legend()` | `theme(legend.position = "none")` |
+| **Legend Font Size** | `cex.legend = 1.2` | `theme(legend.text = element_text(size = 12))` |
+| **Gridlines** | `grid()` | `theme(panel.grid.major = element_line(), panel.grid.minor = element_blank())` |
+| **Background Color** | `par(bg = "lightgray")` | `theme(panel.background = element_rect(fill = "lightgray"))` |
+| **Text Annotations** | `text(x, y, "Label", col="blue")` | `annotate("text", x, y, label="Label", color="blue")` |
+| **Margins** | `par(mar = c(5,4,4,2))` | `theme(plot.margin = margin(10,10,10,10))` |
+| **Notch in Boxplot** | `notch = TRUE` | `geom_boxplot(notch = TRUE)` |
+| **Rotate Labels** | `srt = 45` in `text()` | `theme(axis.text.x = element_text(angle = 45))` |
+| **Change Theme** | Not available in base R | `theme_minimal()`, `theme_classic()`, `theme_light()`, etc. |
+
+---
+
+## **🔹 Example Usage for Each Method**
+
+### **📌 Base R Example**
+```r
+plot(x, y, 
+     main="Base R Customization", 
+     xlab="X Axis", ylab="Y Axis",
+     col="blue", pch=16, cex=1.5,
+     lwd=2, lty=2, 
+     cex.main=1.8, cex.lab=1.4, cex.axis=1.2)
+legend("topright", legend="Data Points", col="blue", pch=16, cex=1.2)
+grid()
+```
+
+---
+
+### **📌 ggplot2 Example**
+```r
+ggplot(data, aes(x, y, color = group)) +
+  geom_point(size = 3, shape = 16) +
+  geom_line(size = 1.5, linetype = "dashed") +
+  labs(title = "ggplot2 Customization",
+       x = "X Axis", y = "Y Axis",
+       color = "Group") +
+  theme_minimal() +
+  theme(
+    text = element_text(size = 14),
+    axis.title = element_text(size = 16, face = "bold"),
+    axis.text = element_text(size = 12),
+    legend.position = "top",
+    legend.text = element_text(size = 12),
+    plot.background = element_rect(fill = "white")
+  )
+```
+
+---
+
+### **✨ Conclusion**
+✅ **Base R (`plot()`, `barplot()`, etc.)** uses **parameters within the function call** (`col=`, `pch=`, `lwd=`, etc.).  
+✅ **ggplot2** is **layer-based** and **theme-driven**, using functions like `geom_*()`, `theme()`, and `labs()`.  
+✅ **Both approaches support full customization**, but **ggplot2** provides **prettier and more scalable** plots.
+
+Would you like **specific examples** for any type of graph? 😊
