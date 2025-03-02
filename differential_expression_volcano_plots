@@ -1,0 +1,67 @@
+Sure! Below is an **improved volcano plot** that not only highlights significantly **upregulated (red) and downregulated (blue) genes** but also **labels specific genes of interest** that you define.
+
+---
+
+### **📌 Volcano Plot with Labeled Genes of Interest**
+```r
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+# Generate sample data
+set.seed(123)
+df <- data.frame(
+  Gene = paste("Gene", 1:1000, sep = ""),  # Random gene names
+  logFC = rnorm(1000, mean = 0, sd = 2),   # Log Fold Change
+  pval = runif(1000, min = 0, max = 1)     # P-values
+)
+
+# Define significance thresholds
+logFC_cutoff <- 1
+pval_cutoff <- 0.05
+
+# Define genes of interest (modify this list with real genes)
+genes_of_interest <- c("Gene50", "Gene150", "Gene250", "Gene350", "Gene450", "Gene550")
+
+# Add significance column
+df <- df %>%
+  mutate(
+    Significance = case_when(
+      pval < pval_cutoff & logFC > logFC_cutoff  ~ "Upregulated",
+      pval < pval_cutoff & logFC < -logFC_cutoff ~ "Downregulated",
+      TRUE ~ "Not Significant"
+    ),
+    Label = ifelse(Gene %in% genes_of_interest & pval < pval_cutoff & abs(logFC) > logFC_cutoff, Gene, NA)  # Label only genes of interest that are significant
+  )
+
+# Volcano Plot
+ggplot(df, aes(x = logFC, y = -log10(pval), color = Significance, label = Label)) +
+  geom_point(alpha = 0.7, size = 2) +  # Scatter plot
+  scale_color_manual(values = c("Upregulated" = "red", "Downregulated" = "blue", "Not Significant" = "gray")) +
+  geom_hline(yintercept = -log10(pval_cutoff), linetype = "dashed", color = "black") +  # P-value threshold line
+  geom_vline(xintercept = c(-logFC_cutoff, logFC_cutoff), linetype = "dashed", color = "black") +  # Fold change threshold lines
+  geom_text(aes(label = Label), vjust = 1, hjust = 0.5, size = 3, color = "black", fontface = "bold", check_overlap = TRUE) +  # Add labels for selected genes
+  theme_minimal() +
+  labs(title = "Volcano Plot with Highlighted Genes of Interest",
+       x = "Log Fold Change",
+       y = "-log10(P-value)",
+       color = "Significance")
+```
+
+---
+
+### **🔹 Key Features of This Code:**
+✔ **Highlights significantly upregulated (red) and downregulated (blue) genes**  
+✔ **Only labels genes of interest** (e.g., `Gene50`, `Gene150`, etc.) if they are **significant**  
+✔ **Dashed threshold lines for p-value (`pval = 0.05`) and log fold change (`logFC = ±1`)**  
+✔ **Avoids label overlap** with `check_overlap = TRUE`  
+✔ **Customizable genes of interest list** (`genes_of_interest` variable)  
+
+---
+
+### **🛠 How to Modify This for Your Dataset:**
+1. **Replace `genes_of_interest` with actual gene names** from your study.
+2. **Adjust `logFC_cutoff` and `pval_cutoff`** based on your research criteria.
+3. **Modify the `geom_text()` aesthetics** (e.g., color, font size, position) to improve readability.
+
+Would you like me to add additional enhancements, such as **highlighting specific genes with different colors**? 😊
