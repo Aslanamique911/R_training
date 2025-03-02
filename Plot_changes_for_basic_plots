@@ -1,0 +1,195 @@
+Certainly! Below is a **comprehensive list** of **R plot parameters**, including **font size adjustments** along with other graphical settings.
+
+---
+
+## **🔹 General Graph Parameters**
+- **`main`** – Main title of the graph.
+- **`sub`** – Subtitle of the graph.
+- **`xlab`** – Label for the x-axis.
+- **`ylab`** – Label for the y-axis.
+- **`asp`** – Aspect ratio of the plot.
+
+---
+
+## **🔹 Adjusting Font Size**
+In **R**, font sizes are controlled using the **`cex` (character expansion)** parameter:
+- **`cex`** – General scaling factor for text and symbols.
+- **`cex.axis`** – Font size for axis tick labels.
+- **`cex.lab`** – Font size for axis labels (`xlab`, `ylab`).
+- **`cex.main`** – Font size for the main title.
+- **`cex.sub`** – Font size for the subtitle.
+- **`cex.legend`** – Font size for legend text.
+- **`cex.text`** – Font size for additional text elements.
+
+**Example Usage:**
+```r
+plot(x, y, main="Graph Title", cex.main=1.5, cex.lab=1.2, cex.axis=1.1, cex=1)
+```
+- `cex.main = 1.5` → Increases the **main title size** by 1.5x.
+- `cex.lab = 1.2` → Increases **axis label size** by 1.2x.
+- `cex.axis = 1.1` → Increases **axis tick label size** by 1.1x.
+- `cex = 1` → Default size for points, text, etc.
+
+---
+
+## **🔹 Adjusting Font Type**
+- **`font`** – Changes text style.
+  - `1` = Plain (default)
+  - `2` = Bold
+  - `3` = Italic
+  - `4` = Bold Italic
+- **`font.axis`** – Font style for axis tick labels.
+- **`font.lab`** – Font style for axis labels.
+- **`font.main`** – Font style for the main title.
+- **`font.sub`** – Font style for subtitles.
+
+**Example:**
+```r
+plot(x, y, main="Bold Title", font.main=2, font.lab=3, font.axis=1)
+```
+- `font.main = 2` → Bold main title.
+- `font.lab = 3` → Italic axis labels.
+- `font.axis = 1` → Default (plain) axis tick labels.
+
+---
+
+## **🔹 Axis and Tick Mark Adjustments**
+- **`xlim`** – Limits of x-axis (`xlim = c(min, max)`).
+- **`ylim`** – Limits of y-axis (`ylim = c(min, max)`).
+- **`las`** – Orientation of axis labels:
+  - `0 = Parallel` to axis (default)
+  - `1 = Horizontal`
+  - `2 = Perpendicular`
+  - `3 = Vertical`
+- **`tck`** – Length of tick marks (`tck = -0.01` for inward, `tck = 0.01` for outward).
+- **`mgp`** – Margin for axis title, labels, and tick marks (`mgp = c(title, labels, line distance)`).
+- **`xaxt` / `yaxt`** – Suppress axis (`"n"` for no axis).
+
+**Example:**
+```r
+plot(x, y, xlim=c(0,100), ylim=c(0,50), las=2, tck=-0.02, mgp=c(2, 0.5, 0))
+```
+
+---
+
+## **🔹 Line and Border Customization**
+- **`lwd`** – Line width.
+- **`lty`** – Line type:
+  - `1 = Solid`
+  - `2 = Dashed`
+  - `3 = Dotted`
+  - `4 = Dot-Dash`
+  - `5 = Long-Dash`
+  - `6 = Two-Dash`
+- **`col`** – Color of lines, points, and text.
+- **`border`** – Color of bar borders in barplots.
+
+**Example:**
+```r
+plot(x, y, type="l", col="blue", lwd=2, lty=2)
+```
+- Blue **dashed line** (`lty=2`), **thicker width** (`lwd=2`).
+
+---
+
+## **🔹 Point and Symbol Adjustments**
+- **`pch`** – Point character type:
+  - `0 = Square`
+  - `1 = Circle`
+  - `2 = Triangle`
+  - `3 = Plus`
+  - `4 = Cross`
+  - `16 = Filled Circle`
+  - `17 = Filled Triangle`
+- **`cex`** – Size of points.
+
+**Example:**
+```r
+plot(x, y, pch=16, cex=1.5, col="red")
+```
+- Red **filled circles**, **larger size** (`cex=1.5`).
+
+---
+
+## **🔹 Legend and Label Adjustments**
+- **`legend`** – Adds a legend:
+```r
+legend("topright", legend=c("Group 1", "Group 2"), col=c("red", "blue"), pch=16, cex=1.2)
+```
+- **`text`** – Adds text annotations:
+```r
+text(x=5, y=10, labels="Important Data Point", cex=1.5, col="blue", font=2)
+```
+- **`adj`** – Adjusts text alignment (`0=left`, `0.5=center`, `1=right`).
+- **`srt`** – Angle of text in degrees.
+
+---
+
+## **🔹 Background and Margins**
+- **`bg`** – Background color.
+- **`fg`** – Foreground color.
+- **`mar`** – Margins (`mar = c(bottom, left, top, right)`).
+- **`oma`** – Outer margins (`oma = c(bottom, left, top, right)`).
+
+**Example:**
+```r
+par(mar=c(5,4,4,2) + 0.1)
+plot(x, y, bg="lightgray")
+```
+- Sets **background to light gray**.
+
+---
+
+## **🔹 Grid and Panel Adjustments**
+- **`grid()`** – Adds a grid to the plot.
+- **`panel.first` / `panel.last`** – Functions to be executed before or after plotting.
+
+**Example:**
+```r
+plot(x, y)
+grid()
+```
+- Adds **grid lines** to the plot.
+
+---
+
+## **🔹 Boxplot Specific Parameters**
+- **`boxwex`** – Width of boxplots.
+- **`notch`** – Notched boxplot (`TRUE` or `FALSE`).
+- **`staplewex`** – Width of whiskers.
+- **`outcol`** – Color of outliers.
+
+**Example:**
+```r
+boxplot(data, notch=TRUE, col="blue", outcol="red")
+```
+
+---
+
+## **🔹 Barplot Specific Parameters**
+- **`beside`** – Whether bars should be placed side by side (`TRUE` or `FALSE`).
+- **`density`** – Shading density for bars.
+- **`angle`** – Angle of shading lines.
+
+**Example:**
+```r
+barplot(height, beside=TRUE, col=c("blue", "red"), density=c(10, 20), angle=c(45, 90))
+```
+
+---
+
+### **🔹 Example Plot with Multiple Adjustments**
+```r
+plot(1:10, 1:10, 
+     main="Customized Scatter Plot", 
+     xlab="X Axis", ylab="Y Axis",
+     pch=16, cex=1.5, col="red",
+     lwd=2, lty=2,
+     cex.main=2, cex.lab=1.5, cex.axis=1.2,
+     font.main=2, font.lab=3)
+grid()
+legend("topright", legend="Data Points", col="red", pch=16, cex=1.2)
+```
+---
+
+This guide covers **all major adjustments** for customizing plots in **R**! Let me know if you need further clarifications or examples. 😊
